@@ -26,8 +26,14 @@ function escolhaHomem(){
 }
 
 function calculoIMC(){
-    let resultado = 0
-    resultado = inputPeso.value / (Math.pow(inputAltura.value, 2))
+    let resultado = 0;
+    let altura = parseFloat(inputAltura.value.replace(',', '.')); // Trata possível vírgula decimal
+    if (altura < 3) {
+        resultado = inputPeso.value / (altura * altura);
+    } else {
+        resultado = inputPeso.value / ((altura / 100) ** 2);
+    }
+    
     if(resultado < 16){
         result.innerHTML = "Magreza grave"
         result.classList.remove("hiden")
